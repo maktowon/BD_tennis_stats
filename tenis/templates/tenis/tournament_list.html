@@ -1,0 +1,69 @@
+{% extends 'tenis/main.html' %}
+
+{% block content %}
+    <div class="tourney_list">
+        <div style="grid-row-start: 1; grid-column-start: 1; grid-column-end: end">
+            <div class="btn-group">
+                <button onclick="location.href='{% url "tournament_list"%}?gs';" class="button ">Grand Slams</button>
+                <button onclick="location.href='{% url "tournament_list"%}?ao';" class="button">Australian Open</button>
+                <button onclick="location.href='{% url "tournament_list"%}?rg';" class="button">Roland Garros</button>
+                <button onclick="location.href='{% url "tournament_list"%}?w';" class="button ">Wimbledon</button>
+                <button onclick="location.href='{% url "tournament_list"%}?uso';" class="button">US Open</button>
+                <button onclick="location.href='{% url "tournament_list"%}?m';" class="button">Masters</button>
+            </div>
+        </div>
+        <div style="grid-row-start: 2; grid-column-start: 1; grid-column-end: end">
+            <div class="btn-group">
+                <button onclick="location.href='{% url "tournament_list"%}?clay';" class="button ">clay</button>
+                <button onclick="location.href='{% url "tournament_list"%}?grass';" class="button">grass</button>
+                <button onclick="location.href='{% url "tournament_list"%}?carpet';" class="button">carpet</button>
+                <button onclick="location.href='{% url "tournament_list"%}?hard';" class="button ">hard</button>
+            </div>
+        </div>
+        <div style="grid-row-start: 3; grid-column-start: 1; grid-column-end: end; justify-content: center">
+            <div class="box">
+                <h1>Search</h1>
+                <form method="get" action="{% url "tournament_list"%}">
+                    <label>
+                        <input type="text" id="name" name="loc" placeholder="Type location">
+                    </label>
+                    <label>
+                        <input type="text" id="surname" name="year" placeholder="Type year" >
+                    </label>
+                    <input type="submit" name="" value="Find">
+                </form>
+            </div>
+        </div>
+        <table class="table clickable" style="grid-row-start: 4; grid-column-start: 2">
+            <tr>
+                <th onclick="location.href='{% url "tournament_list" %}?l';"> Location </th>
+                <th onclick="location.href='{% url "tournament_list" %}?s';"> Surface </th>
+                <th onclick="location.href='{% url "tournament_list" %}?dr';"> Draw size </th>
+                <th onclick="location.href='{% url "tournament_list" %}?d';"> Date </th>
+                <th onclick="location.href='{% url "tournament_list" %}?lv';"> Level </th>
+            </tr>
+        {% for tournament in tournaments %}
+            <tr>
+                <td onclick="location.href='{% url "tournament_selected" tournament.tournament_id %}';">
+                    {{ tournament.location }}
+                </td>
+                <td>
+                    {{ tournament.surface }}
+                </td>
+                <td>
+                    {{ tournament.draw_size }}
+                </td>
+                <td>
+                    {{ tournament.date }}
+                </td>
+                <td>
+                    {{ tournament.level }}
+                </td>
+
+            </tr>
+        {% endfor %}
+        </table>
+    </div>
+
+
+{% endblock %}

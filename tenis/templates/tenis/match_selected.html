@@ -1,0 +1,160 @@
+{% extends 'tenis/main.html' %}
+
+{% block content %}
+<div class="match">
+    <div class="match_title">
+        {{ match.tourney_id }} {{ match.round }}
+    </div>
+    <div class="match_info">
+        <div style="text-align: center; font-size: 50px">
+            BASIC INFORMATION:
+        </div>
+        <table class="table" id="info_table">
+            <tr onclick="location.href='{% url "tournament_selected" match.tourney_id_id %}';">
+                <th>
+                    Tournament:
+                </th>
+                <td>
+                    {{ match.tourney_id }}
+                </td>
+            <tr>
+            <tr onclick="location.href='{% url "player_selected" match.winners_id_id %}';">
+                <th>
+                    Winner / Rank:
+                </th>
+                <td>
+                    {{ match.winners_id.name }}  {{ match.winners_id.surname }} / {{ wstats.player_rank }}
+                </td>
+            <tr>
+            <tr onclick="location.href='{% url "player_selected" match.losers_id_id %}';">
+                <th>
+                    Loser / Rank:
+                </th>
+                <td>
+                    {{ match.losers_id.name }}  {{ match.losers_id.surname }} / {{ lstats.player_rank }}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Time [min]:
+                </th>
+                <td>
+                    {{ match.time }}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Score:
+                </th>
+                <td>
+                    {{ match.score }}
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+
+    <div class="math_stats_title"> Indepth stats </div>
+    <div class="match_stats">
+
+        <table class="table clickable" id="stat_table">
+            <tr>
+                <th onclick="location.href='{% url "compare_stats" match.winners_id_id match.losers_id_id %}';"> click to show life-time stats </th>
+                <th onclick="location.href='{% url "player_selected" match.winners_id_id %}';"> winner </th>
+                <th onclick="location.href='{% url "player_selected" match.losers_id_id %}';"> loser </th>
+            </tr>
+            <tr>
+                <th>
+                    Serves:
+                </th>
+                <td>
+                    {{ wstats.serve_points }}
+                </td>
+                <td>
+                    {{ lstats.serve_points }}
+                </td>
+            <tr>
+            <tr>
+                <th>
+                    Aces:
+                </th>
+                <td>
+                    {{ wstats.aces }}
+                </td>
+                <td>
+                    {{ lstats.aces }}
+                </td>
+            <tr>
+            <tr>
+                <th>
+                    Double faults:
+                </th>
+                <td>
+                    {{ wstats.double_faults }}
+                </td>
+                <td>
+                    {{ lstats.double_faults }}
+                </td>
+            <tr>
+            <tr>
+                <th>
+                    First serve:
+                </th>
+                <td>
+                    {{ wstats.first_serve }}
+                </td>
+                <td>
+                    {{ lstats.first_serve }}
+                </td>
+            <tr>
+            <tr>
+                <th>
+                    Won first serve:
+                </th>
+                <td>
+                    {{ wstats.first_won }}
+                </td>
+                <td>
+                    {{ lstats.first_won }}
+                </td>
+            <tr>
+            <tr>
+                <th>
+                    Won second serve:
+                </th>
+                <td>
+                    {{ wstats.second_won }}
+                </td>
+                <td>
+                    {{ lstats.second_won }}
+                </td>
+            <tr>
+            <tr>
+                <th>
+                    Break points faced:
+                </th>
+                <td>
+                    {{ wstats.bp_faced }}
+                </td>
+                <td>
+                    {{ lstats.bp_faced }}
+                </td>
+            <tr>
+            <tr>
+                <th>
+                    Break points saved:
+                </th>
+                <td>
+                    {{ wstats.bp_saved }}
+                </td>
+                <td>
+                    {{ lstats.bp_saved }}
+                </td>
+            <tr>
+        </table>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,118 @@
+{% extends 'tenis/main.html' %}
+
+{% block content %}
+<div class="match">
+    <div class="math_stats_title"> All time stats </div>
+    <div class="match_stats">
+
+        <table class="table clickable" id="stat_table">
+            <tr>
+                <th></th>
+                <th onclick="location.href='{% url "player_selected" p1.player_id %}';"> {{ p1.name }} {{ p1.surname }} </th>
+                <th onclick="location.href='{% url "player_selected" p2.player_id %}';"> {{ p2.name }} {{ p2.surname }} </th>
+            </tr>
+            <tr>
+                <th>
+                    Rank:
+                </th>
+                <td>
+                    {{ r1 }}
+                </td>
+                <td>
+                    {{ r2 }}
+                </td>
+            <tr>
+            <tr>
+                <th>
+                    Won:
+                </th>
+                <td>
+                    {{ p1win }}
+                </td>
+                <td>
+                    {{ p2win }}
+                </td>
+            <tr>
+            <tr>
+                <th>
+                    Aces:
+                </th>
+                <td>
+                    {{ s1.aces }}
+                </td>
+                <td>
+                    {{ s2.aces }}
+                </td>
+            <tr>
+            <tr>
+                <th>
+                    Double faults:
+                </th>
+                <td>
+                    {{ s1.double_faults }}
+                </td>
+                <td>
+                    {{ s2.double_faults }}
+                </td>
+            <tr>
+            <tr>
+                <th>
+                    First serve:
+                </th>
+                <td>
+                    {{ s1.first_serve }}
+                </td>
+                <td>
+                    {{ s2.first_serve }}
+                </td>
+            <tr>
+            <tr>
+                <th>
+                    Won first serve:
+                </th>
+                <td>
+                    {{ s1.first_won }}
+                </td>
+                <td>
+                    {{ s2.first_won }}
+                </td>
+            <tr>
+            <tr>
+                <th>
+                    Won second serve:
+                </th>
+                <td>
+                    {{ s1.second_won }}
+                </td>
+                <td>
+                    {{ s2.second_won }}
+                </td>
+            <tr>
+            <tr>
+                <th>
+                    Break points faced:
+                </th>
+                <td>
+                    {{ s1.bp_faced }}
+                </td>
+                <td>
+                    {{ s2.bp_faced }}
+                </td>
+            <tr>
+            <tr>
+                <th>
+                    Break points saved:
+                </th>
+                <td>
+                    {{ s1.bp_saved }}
+                </td>
+                <td>
+                    {{ s2.bp_saved }}
+                </td>
+            <tr>
+        </table>
+    </div>
+</div>
+
+
+{% endblock %}

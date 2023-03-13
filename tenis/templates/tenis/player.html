@@ -1,0 +1,138 @@
+{% extends 'tenis/main.html' %}
+
+{% block content %}
+<div class="player">
+    <div class="player_name">
+        {{ player.name }} {{ player.surname }}
+    </div>
+    <div class="player_info">
+        <div style="text-align: center; font-size: 40px">
+            BASIC INFORMATION:
+        </div>
+        <table class="table" style="margin-top: 25px; width: 550px;">
+            <tr>
+                <th>
+                    Nationality:
+                </th>
+                <td>
+                    {{ player.country }}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Birth:
+                </th>
+                <td>
+                    {{ player.birth }}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Height:
+                </th>
+                <td>
+                    {{ player.height }}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Hand
+                </th>
+                <td>
+                    {% if player.hand == 'R' %} right-handed {% elif player.hand == 'L' %} left-handed {% else %} unknown {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Rank:
+                </th>
+                <td>
+                    {% if ranking != '-1' %} {{ ranking }} {% else %} undefined {% endif %}
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="player_matches">
+        <div class="player_matches_title"> MATCH HISTORY </div>
+        <div class="player_matches_won">
+            <div style="overflow-y: auto; font-size: 20px;">
+                <table class="table clickable" style="width: 275px">
+                <tr>
+                    <th>WON</th>
+                </tr>
+                {% for Match in won %}
+                    <tr>
+                        <td onclick="location.href='{% url "match_selected" Match.match_id %}';">
+                            {{ Match.round }} {{ Match.tourney_id.location }}
+                        </td>
+                    </tr>
+            {% endfor %}
+            </table>
+            </div>
+        </div>
+        <div class="player_matches_lost">
+            <div style="overflow-y: auto; font-size: 20px;">
+                <table class="table clickable" style="width: 275px">
+                <tr>
+                    <th>LOST</th>
+                </tr>
+                {% for Match in lost %}
+                    <tr>
+                        <td onclick="location.href='{% url "match_selected" Match.match_id %}';">
+                            {{ Match.round }} {{ Match.tourney_id.location }}
+                        </td>
+                    </tr>
+            {% endfor %}
+            </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="player_wr">
+        <div style="text-align: center; font-size: 40px">
+        RECORD:
+        </div>
+        <table class="table" style="margin-top: 25px; width: auto; font-size: 24px">
+            <tr>
+                <th>
+                    Played
+                </th>
+                <th>
+                    Won
+                </th>
+                <th>
+                    Lost
+                </th>
+            </tr>
+            <tr>
+                <td>
+                {{ all }}
+                </td>
+                <td>
+                {{ wins }}
+                </td>
+                <td>
+                {{ loses }}
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td> {{ wr }}%</td>
+                <td> {{ lr }}%</td>
+            </tr>
+        </table>
+        <form method="post" action="{% url 'player_selected' player.player_id %}">
+            {% csrf_token %}
+            <input type="hidden" value="Create">
+            {% if added == True %}
+                <button class="button" type="submit"> Remove {{ player }} from favourites </button>
+            {% else %}
+                <button class="button" type="submit"> Add {{ player }} to favourites </button>
+            {% endif %}
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

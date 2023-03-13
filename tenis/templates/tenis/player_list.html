@@ -1,0 +1,56 @@
+{% extends 'tenis/main.html' %}
+
+{% block content %}
+    <div class="player_list">
+        <div style="grid-row-start: 1; grid-column-start: 2;">
+            <div class="btn-group">
+                <button onclick="location.href='{% url "player_list"%}';" class="button ">By surname</button>
+                <button onclick="location.href='{% url "player_list"%}?su';" class="button">From youngest</button>
+                <button onclick="location.href='{% url "player_list"%}?sd';" class="button">From oldest</button>
+            </div>
+        </div>
+        <div style="grid-row-start: 2; grid-column-start: 1; grid-column-end: end; justify-content: center">
+            <div class="box">
+                <h1>Search</h1>
+                <form method="get" action="{% url "player_list"%}">
+                    <label>
+                        <input type="text" id="name" name="n" placeholder="Type name">
+                    </label>
+                    <label>
+                        <input type="text" id="surname" name="s" placeholder="Type surname" >
+                    </label>
+                    <input type="submit" name="" value="Find">
+                </form>
+            </div>
+        </div>
+
+        <div style="grid-row-start: 3; grid-column-start: 2">
+            <table class="table clickable" id="player_table" style="width: 200px">
+                <tr>
+                    <th> Name </th>
+                    <th> Surname </th>
+                    <th> Birth </th>
+                    <th> Country </th>
+                </tr>
+            {% for player in players %}
+                <tr>
+                    <td onclick="location.href='{% url "player_selected" player.player_id %}';">
+                        {{ player.name }}
+                    </td>
+                    <td onclick="location.href='{% url "player_selected" player.player_id %}';">
+                        {{ player.surname }}
+                    </td>
+                    <td>
+                        {{ player.birth }}
+                    </td>
+                    <td onclick="location.href='{% url "player_list" %}?c={{ player.country }}';">
+                        {{ player.country }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </table>
+        </div>
+    </div>
+
+
+{% endblock %}

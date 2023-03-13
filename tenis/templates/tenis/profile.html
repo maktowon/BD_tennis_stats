@@ -1,0 +1,40 @@
+{% extends 'tenis/main.html' %}
+
+{% block content %}
+    <div class="profile">
+    {% if request.user.is_authenticated %}
+
+        <div id="profile_info">
+                <div><b>Profile Information:</b></div>
+                <div>User name: <b>{{ request.user.username }}</b></div>
+                <div>User e-mail: <b>{{ request.user.email }}</b></div>
+                <div><a href="{% url 'password_reset' %}">Change password</a></div>
+
+        </div>
+        <div class="container">
+        <h1 style="text-align: center">Your favourite players:</h1>
+        <div style="grid-column-start: 1; grid-column-end: 3; padding-left:15px; padding-right: 15px "><hr></div>
+
+        {% for fav in favs %}
+            <table class="table" style="margin-top: 25px; width: 250px;">
+            <tr>
+                <th>
+                    Player:
+                </th>
+                <td>
+                    {{ fav.player }}
+                </td>
+                <td style="width: 90px; background-color: red" onclick="location.href='{% url "remove" fav.player.player_id %}';">
+                    REMOVE
+                </td>
+            </tr>
+        </table>
+        {% endfor %}
+    </div>
+
+    {% else %}
+        <h5 style="text-align: center; color: red">You should not be here</h5>
+    {% endif %}
+    </div>
+
+{% endblock %}

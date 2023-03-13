@@ -1,0 +1,32 @@
+{% extends 'tenis/main.html' %}
+
+{% block content %}
+
+
+<div class="center">
+    <h1>Login</h1>
+    <form method="POST" action="">
+        {% csrf_token %}
+
+        <div class="text-filed">
+            <input type="text" name="username" placeholder="username" />
+
+        </div>
+        <div class="text-filed">
+            <input type="password" name="password" placeholder="password" />
+
+        </div>
+        <div class="submit-button">
+            <input class="hover-lighter" type="submit" value="Login" />
+        </div>
+        <a href="{% url 'password_reset' %}">Forgotten password?</a>
+{#        <button id="sign-up" onclick="location.href='{% url "register" %}'">Sign up</button>#}
+        <a href="{% url 'register' %}">Create an account</a>
+    </form>
+
+
+
+</div>
+
+{% endblock %}
+

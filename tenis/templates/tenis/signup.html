@@ -1,0 +1,28 @@
+{% extends 'tenis/main.html' %}
+  
+{% block content %}
+    <div class="rest">
+        <div class = "center" >
+            <h1>Sign up</h1>
+            <form method="post">
+            {% csrf_token %}
+              {% for field in form %}
+                <div class="basic-form">
+                {{ field.label_tag }}
+                {{ field }}
+                {% if field.help_text %}
+                  <br><small >{{ field.help_text }}</small>
+                {% endif %}
+                {% for error in field.errors %}
+                    <p style="color: red">{{ error }}</p>
+                    {% endfor %}
+                    </div>
+                {% endfor %}
+                <div class="submit-button">
+                    <button type="submit">Sign up</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %} 

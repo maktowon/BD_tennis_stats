@@ -1,0 +1,40 @@
+{% extends 'tenis/main.html' %}
+
+{% block content %}
+    <div class="tournament">
+        <div style="grid-row-start: 1; grid-column-start: 1; grid-column-end: end">
+            <div class="btn-group">
+                <button onclick="location.href='{% url "tournament_selected" tid%}';" class="button">All</button>
+                <button onclick="location.href='{% url "tournament_selected" tid%}?b32';" class="button">Best 32</button>
+                <button onclick="location.href='{% url "tournament_selected" tid%}?b16';" class="button ">Best 16</button>
+                <button onclick="location.href='{% url "tournament_selected" tid%}?qf';" class="button ">Quarter Finals</button>
+                <button onclick="location.href='{% url "tournament_selected" tid%}?sf';" class="button">Semi Finals</button>
+                <button onclick="location.href='{% url "tournament_selected" tid%}?f';" class="button">Final</button>
+
+            </div>
+        </div>
+        <table class="table clickable" style="grid-row-start: 4; grid-column-start: 2; width: 200px">
+            <tr>
+                <th> Round </th>
+                <th> Player 1 </th>
+                <th> Player 2 </th>
+                <th> Score </th>
+            </tr>
+        {% for match in matches %}
+            <tr>
+                <td onclick="location.href='{% url "match_selected" match.match_id %}';">
+                    {{ match.round }}
+                </td>
+                <td onclick="location.href='{% url "player_selected" match.winners_id.player_id %}';">
+                    {{ match.winners_id.name }}  {{ match.winners_id.surname }}
+                <td onclick="location.href='{% url "player_selected" match.losers_id.player_id %}';">
+                    {{ match.losers_id.name }}  {{ match.losers_id.surname }}
+                </td>
+                <td>
+                    {{ match.score }}
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+    </div>
+{% endblock %}
