@@ -7,3 +7,4 @@ admin.site.register(Tournament)
 admin.site.register(Match)
 admin.site.register(Stats)
 admin.site.register(Favourite)
+
